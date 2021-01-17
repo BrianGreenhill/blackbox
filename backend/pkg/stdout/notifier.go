@@ -2,8 +2,9 @@ package stdout
 
 import (
 	"fmt"
-	"greenhill/backend/pkg/internal"
 	"io"
+
+	"greenhill/backend/pkg/internal"
 )
 
 type notifier struct {

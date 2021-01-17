@@ -1,8 +1,6 @@
 package main
 
-import (
-	"greenhill/backend/pkg/cmd"
-)
+import "greenhill/backend/pkg/cmd"
 
 const URL = "https://www.google.com"
 

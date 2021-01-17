@@ -2,8 +2,9 @@ package stdout
 
 import (
 	"bytes"
-	"greenhill/backend/pkg/internal"
 	"testing"
+
+	"greenhill/backend/pkg/internal"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -2,9 +2,10 @@ package web
 
 import (
 	"fmt"
-	"greenhill/backend/pkg/internal"
 	"net"
 	"net/http"
+
+	"greenhill/backend/pkg/internal"
 )
 
 type Checker struct {

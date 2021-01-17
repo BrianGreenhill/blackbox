@@ -1,11 +1,12 @@
 package web_test
 
 import (
+	"net/http"
+	"testing"
+
 	"greenhill/backend/pkg/internal"
 	"greenhill/backend/pkg/mocks"
 	"greenhill/backend/pkg/web"
-	"net/http"
-	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
