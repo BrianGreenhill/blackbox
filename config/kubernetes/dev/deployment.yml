@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blackbox-api-deployment
+  labels:
+    app: blackbox-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: blackbox-api
+  template:
+    metadata:
+      labels:
+        app: blackbox-api
+    spec:
+      containers:
+      - name: blackbox-api
+        image: blackbox-api
+        ports:
+        - containerPort: 8090

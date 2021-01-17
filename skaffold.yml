@@ -1,0 +1,12 @@
+apiVersion: skaffold/v1beta10
+kind: Config
+build:
+  artifacts:
+    - image: blackbox-api
+      context: backend
+  local:
+    push: false
+deploy:
+  kubectl:
+    manifests:
+      - config/kubernetes/dev/*
