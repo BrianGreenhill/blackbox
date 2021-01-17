@@ -18,6 +18,6 @@ func TestWriterWritesToStdout(t *testing.T) {
 
 	err := usecase.Notify(expected)
 	assert.NoError(t, err)
-	actual := string(buf.Bytes())
+	actual := buf.String()
 	assert.Equal(t, "test message", actual)
 }

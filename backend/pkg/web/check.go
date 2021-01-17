@@ -37,7 +37,6 @@ func (w *Checker) DoCheck(t internal.Target, n internal.Notifier) error {
 	switch statuscode {
 	case 301:
 		statuscodemsg = "We were redirected.\n"
-		break
 	}
 
 	msg.Message = fmt.Sprintf("%sresponse was: %d", statuscodemsg, statuscode)
