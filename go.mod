@@ -1,4 +1,4 @@
-module greenhill/backend
+module github.com/briangreenhill/blackbox
 
 go 1.15
 

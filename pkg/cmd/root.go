@@ -5,11 +5,12 @@ import (
 	"net/http"
 	"os"
 
-	"greenhill/backend/pkg/internal"
-	"greenhill/backend/pkg/stdout"
-	"greenhill/backend/pkg/web"
+	"github.com/briangreenhill/blackbox/pkg/internal"
+	"github.com/briangreenhill/blackbox/pkg/stdout"
+	"github.com/briangreenhill/blackbox/pkg/web"
 )
 
+// Run is the entrypoint to the application
 func Run(name, url string) {
 	// create checker
 	checker := web.Checker{

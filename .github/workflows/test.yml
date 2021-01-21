@@ -17,12 +17,12 @@ jobs:
       uses: golangci/golangci-lint-action@v2
       with:
         version: v1.33
-        working-directory: backend
+        working-directory: .
         args: -E goimports
       env:
         CGO_ENABLED: 0
     - name: Test
       run: go test ./...
-      working-directory: backend
+      working-directory: .
       env:
         CGO_ENABLED: 0

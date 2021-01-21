@@ -1,17 +1,18 @@
-package stdout
+package stdout_test
 
 import (
 	"bytes"
 	"testing"
 
-	"greenhill/backend/pkg/internal"
+	"github.com/briangreenhill/blackbox/pkg/internal"
+	"github.com/briangreenhill/blackbox/pkg/stdout"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestWriterWritesToStdout(t *testing.T) {
 	buf := new(bytes.Buffer)
-	usecase := NewNotifier(buf)
+	usecase := stdout.NewNotifier(buf)
 	expected := &internal.CheckResult{
 		Message: "test message",
 	}

@@ -5,17 +5,20 @@ import (
 	"net"
 	"net/http"
 
-	"greenhill/backend/pkg/internal"
+	"github.com/briangreenhill/blackbox/pkg/internal"
 )
 
+// Checker performs simple site availability checks
 type Checker struct {
 	Client Doer
 }
 
+// Doer defines an interface for a client that can prform an availability check
 type Doer interface {
 	Do(*http.Request) (*http.Response, error)
 }
 
+// DoCheck is used to check the availability of a target and uses a notifier to communicate the result
 func (w *Checker) DoCheck(t internal.Target, n internal.Notifier) error {
 	var msg = &internal.CheckResult{Message: ""}
 	req, err := http.NewRequest(http.MethodGet, t.URL, nil)
