@@ -22,7 +22,7 @@ jobs:
       env:
         CGO_ENABLED: 0
     - name: Test
-      run: go test ./...
+      run: make test
       working-directory: .
       env:
         CGO_ENABLED: 0
