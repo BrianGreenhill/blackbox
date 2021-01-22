@@ -1,6 +1,6 @@
 package main
 
-import "greenhill/backend/pkg/cmd"
+import "github.com/briangreenhill/blackbox/pkg/cmd"
 
 const URL = "https://www.google.com"
 

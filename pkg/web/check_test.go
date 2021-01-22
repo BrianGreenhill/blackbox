@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"testing"
 
-	"greenhill/backend/pkg/internal"
-	"greenhill/backend/pkg/mocks"
-	"greenhill/backend/pkg/web"
+	"github.com/briangreenhill/blackbox/pkg/internal"
+	"github.com/briangreenhill/blackbox/pkg/mocks"
+	"github.com/briangreenhill/blackbox/pkg/web"
 
 	"github.com/stretchr/testify/assert"
 )

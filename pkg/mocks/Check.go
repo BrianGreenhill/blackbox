@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	internal "greenhill/backend/pkg/internal"
+	internal "github.com/briangreenhill/blackbox/pkg/internal"
 
 	mock "github.com/stretchr/testify/mock"
 )

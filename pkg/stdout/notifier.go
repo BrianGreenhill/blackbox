@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"io"
 
-	"greenhill/backend/pkg/internal"
+	"github.com/briangreenhill/blackbox/pkg/internal"
 )
 
 type notifier struct {
