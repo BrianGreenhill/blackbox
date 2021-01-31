@@ -12,20 +12,21 @@ import (
 
 // Run is the entrypoint to the application
 func Run(name, url string) {
-	// create checker
-	checker := web.Checker{
-		Client: http.DefaultClient,
-	}
-
 	// create notifier
 	notifier := stdout.NewNotifier(os.Stdout)
+
+	// create checker
+	checker := web.Checker{
+		Client:   http.DefaultClient,
+		Notifier: &notifier,
+	}
 
 	target := internal.Target{
 		Name: name,
 		URL:  url,
 	}
 
-	err := checker.DoCheck(target, &notifier)
+	err := checker.DoCheck(target)
 	if err != nil {
 		log.Fatal(err)
 	}

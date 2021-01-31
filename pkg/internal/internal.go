@@ -10,9 +10,13 @@ type CheckResult struct {
 	Message string
 }
 
-// Check performs site checks and returns an error
-type Check interface {
-	DoCheck(Target, Notifier) error
+// Checker performs site checks and returns an error
+type Checker interface {
+	DoCheck(Target) error
+}
+
+type Scheduler interface {
+	Schedule(schedule string) error
 }
 
 // Target represents a site that can be checked
