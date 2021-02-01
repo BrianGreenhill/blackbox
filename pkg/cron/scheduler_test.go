@@ -19,15 +19,16 @@ func TestScheduler(t *testing.T) {
 	}
 
 	checkerMock := new(mocks.ConcurrentChecker)
-	checkerMock.Wg.Add(1)
+	checkerMock.Wg.Add(2)
 	start := time.Now()
 	checkerMock.On("DoCheck", mock.Anything, mock.Anything).Return(nil)
 	usecase := cron.NewCronScheduler(checkerMock)
-	usecase.Schedule(scheduleEverySecond, target)
+	err := usecase.Schedule(scheduleEverySecond, target)
+	assert.Nil(t, err)
 	checkerMock.Wg.Wait()
 	end := time.Now()
 	diff := end.Sub(start)
-	assert.GreaterOrEqual(t, diff, time.Second)
+	assert.GreaterOrEqual(t, diff, 1*time.Second)
 
 	checkerMock.AssertExpectations(t)
 }

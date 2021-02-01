@@ -28,5 +28,8 @@ func RunSchedule(name, url, schedule string) {
 		log.Fatal(err)
 	}
 	scheduler := cron.NewCronScheduler(&checker)
-	scheduler.Schedule(schedule, target)
+
+	if err := scheduler.Schedule(schedule, target); err != nil {
+		log.Fatal(err)
+	}
 }
