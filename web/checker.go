@@ -5,12 +5,13 @@ import (
 	"net"
 	"net/http"
 
-	"github.com/briangreenhill/blackbox/pkg/internal"
+	"github.com/briangreenhill/blackbox/internal"
 )
 
 // Checker performs simple site availability checks
 type Checker struct {
-	Client Doer
+	Client   Doer
+	Notifier internal.Notifier
 }
 
 // Doer defines an interface for a client that can prform an availability check
@@ -19,7 +20,7 @@ type Doer interface {
 }
 
 // DoCheck is used to check the availability of a target and uses a notifier to communicate the result
-func (w *Checker) DoCheck(t internal.Target, n internal.Notifier) error {
+func (w *Checker) DoCheck(t internal.Target) error {
 	var msg = &internal.CheckResult{Message: ""}
 	req, err := http.NewRequest(http.MethodGet, t.URL, nil)
 	if err != nil {
@@ -30,7 +31,7 @@ func (w *Checker) DoCheck(t internal.Target, n internal.Notifier) error {
 		_, err := net.LookupHost(t.URL)
 		if err != nil {
 			msg.Message = "That host did not exist"
-			return n.Notify(msg)
+			return w.Notifier.Notify(msg)
 		}
 		return err
 	}
@@ -43,5 +44,5 @@ func (w *Checker) DoCheck(t internal.Target, n internal.Notifier) error {
 	}
 
 	msg.Message = fmt.Sprintf("%sresponse was: %d", statuscodemsg, statuscode)
-	return n.Notify(msg)
+	return w.Notifier.Notify(msg)
 }

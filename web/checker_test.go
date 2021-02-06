@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/briangreenhill/blackbox/pkg/internal"
-	"github.com/briangreenhill/blackbox/pkg/mocks"
-	"github.com/briangreenhill/blackbox/pkg/web"
+	"github.com/briangreenhill/blackbox/internal"
+	"github.com/briangreenhill/blackbox/mocks"
+	"github.com/briangreenhill/blackbox/web"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -28,14 +28,16 @@ func (c *ClientMock) Do(r *http.Request) (*http.Response, error) {
 }
 
 func TestCheckReturnsCheckResultOnFailure(t *testing.T) {
-	w := web.Checker{}
-	w.Client = newClientMock(500)
 	n := new(mocks.Notifier)
+	w := web.Checker{
+		Notifier: n,
+		Client:   newClientMock(500),
+	}
 	checkResult := &internal.CheckResult{
 		Message: "response was: 500",
 	}
 	n.On("Notify", checkResult).Return(nil)
 
-	err := w.DoCheck(internal.Target{}, n)
+	err := w.DoCheck(internal.Target{})
 	assert.NoError(t, err)
 }

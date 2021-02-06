@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/briangreenhill/blackbox/pkg/internal"
-	"github.com/briangreenhill/blackbox/pkg/stdout"
+	"github.com/briangreenhill/blackbox/internal"
+	"github.com/briangreenhill/blackbox/stdout"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -20,5 +20,5 @@ func TestWriterWritesToStdout(t *testing.T) {
 	err := usecase.Notify(expected)
 	assert.NoError(t, err)
 	actual := buf.String()
-	assert.Equal(t, "test message", actual)
+	assert.Equal(t, "test message\n", actual)
 }
