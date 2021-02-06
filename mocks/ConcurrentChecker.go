@@ -5,7 +5,7 @@ package mocks
 import (
 	"sync"
 
-	internal "github.com/briangreenhill/blackbox/pkg/internal"
+	internal "github.com/briangreenhill/blackbox/internal"
 	mock "github.com/stretchr/testify/mock"
 )
 

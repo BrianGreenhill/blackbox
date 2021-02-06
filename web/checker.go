@@ -5,7 +5,7 @@ import (
 	"net"
 	"net/http"
 
-	"github.com/briangreenhill/blackbox/pkg/internal"
+	"github.com/briangreenhill/blackbox/internal"
 )
 
 // Checker performs simple site availability checks

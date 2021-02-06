@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/briangreenhill/blackbox/pkg/internal"
-	"github.com/briangreenhill/blackbox/pkg/stdout"
-	"github.com/briangreenhill/blackbox/pkg/web"
+	"github.com/briangreenhill/blackbox/internal"
+	"github.com/briangreenhill/blackbox/stdout"
+	"github.com/briangreenhill/blackbox/web"
 )
 
 // Run is the entrypoint to the application
@@ -18,7 +18,7 @@ func Run(name, url string) {
 	// create checker
 	checker := web.Checker{
 		Client:   http.DefaultClient,
-		Notifier: &notifier,
+		Notifier: notifier,
 	}
 
 	target := internal.Target{

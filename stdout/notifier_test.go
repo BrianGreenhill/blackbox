@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/briangreenhill/blackbox/pkg/internal"
-	"github.com/briangreenhill/blackbox/pkg/stdout"
+	"github.com/briangreenhill/blackbox/internal"
+	"github.com/briangreenhill/blackbox/stdout"
 
 	"github.com/stretchr/testify/assert"
 )
