@@ -6,6 +6,7 @@ import (
 
 	"github.com/briangreenhill/blackbox/cmd"
 	"github.com/briangreenhill/blackbox/mocks"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestScheduleCommand(t *testing.T) {
@@ -29,16 +30,21 @@ func TestScheduleCommand(t *testing.T) {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			scheduler := new(mocks.Scheduler)
-			if tt.errorExpected == false {
-				scheduler.On("Schedule", tt.schedule).Return(nil)
-			} else {
-				scheduler.On("Schedule", tt.schedule).Return(errors.New("you suck"))
+			var err error
+			if tt.errorExpected {
+				err = errors.New("you suck")
 			}
+			scheduler.On("Schedule", tt.schedule).Return(err)
 
 			scheduleCommand := cmd.ScheduleCommand{
 				Scheduler: scheduler,
 			}
-			scheduleCommand.RunSchedule(tt.schedule)
+			err = scheduleCommand.RunSchedule(tt.schedule)
+			if tt.errorExpected {
+				assert.Error(t, err)
+			} else {
+				assert.NoError(t, err)
+			}
 			scheduler.AssertExpectations(t)
 		})
 	}

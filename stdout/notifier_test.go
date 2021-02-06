@@ -20,5 +20,5 @@ func TestWriterWritesToStdout(t *testing.T) {
 	err := usecase.Notify(expected)
 	assert.NoError(t, err)
 	actual := buf.String()
-	assert.Equal(t, "test message", actual)
+	assert.Equal(t, "test message\n", actual)
 }
