@@ -11,7 +11,7 @@ githooks-init:
 
 .PHONY: lint
 lint: bin/golangci-lint
-	@./bin/golangci-lint -E goimports run ./...
+	@./bin/golangci-lint run ./...
 
 bin/golangci-lint:
 	@curl -fsSL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s $(GOLANGCI_LINT_VERSION)

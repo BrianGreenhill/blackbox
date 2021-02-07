@@ -1,0 +1,57 @@
+linters:
+  enable:
+    - bodyclose
+    - deadcode
+    - depguard
+    - dogsled
+    - dupl
+    - errcheck
+    - exportloopref
+    - gochecknoinits
+    - gocritic
+    - gocyclo
+    - gofmt
+    - goimports
+    - golint
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - govet
+    - ineffassign
+    - interfacer
+    - maligned
+    - misspell
+    - nakedret
+    - nolintlint
+    - prealloc
+    - rowserrcheck
+    - scopelint
+    - staticcheck
+    - structcheck
+    - stylecheck
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - varcheck
+    - whitespace
+  disable:
+    - lll # we allow any line length
+    - goconst # we allow repeated values to go un-const'd
+    - gochecknoglobals # we allow global variables in packages
+
+linters-settings:
+  dupl:
+    threshold: 100
+  errcheck:
+    check-blank: true
+  golint:
+    min-confidence: 0
+  nakedret:
+    max-func-lines: 0
+
+issues:
+  exclude-rules:
+    - path: _test.go
+      linters:
+        - dupl # many functions in tests look like duplicates

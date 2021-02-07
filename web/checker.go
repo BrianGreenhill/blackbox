@@ -35,11 +35,11 @@ func (w *Checker) DoCheck(t internal.Target) error {
 		}
 		return err
 	}
+	defer resp.Body.Close()
 
 	statuscode := resp.StatusCode
 	var statuscodemsg string
-	switch statuscode {
-	case 301:
+	if statuscode == 301 {
 		statuscodemsg = "We were redirected.\n"
 	}
 
