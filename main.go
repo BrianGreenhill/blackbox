@@ -29,8 +29,8 @@ func init() {
 
 func main() {
 	flag.Parse()
-	if url == "" {
-		log.Fatal("url is required")
+	if schedule == "" || url == "" {
+		log.Fatal("schedule and url are required fields")
 	}
 
 	checker := &web.Checker{
@@ -54,6 +54,5 @@ func main() {
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, syscall.SIGINT, syscall.SIGTERM)
 	s := <-signals
-	log.Printf("got %s signal, shutting down", s.String())
-	os.Exit(0)
+	log.Fatalf("got %s signal, shutting down", s.String())
 }
