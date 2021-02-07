@@ -15,6 +15,8 @@ import (
 	"github.com/briangreenhill/blackbox/web"
 )
 
+const defaultSchedule = "* * * * * *"
+
 var (
 	url      string
 	schedule string
@@ -29,8 +31,12 @@ func init() {
 
 func main() {
 	flag.Parse()
-	if schedule == "" || url == "" {
-		log.Fatal("schedule and url are required fields")
+	if url == "" {
+		log.Fatal("url is required")
+	}
+
+	if schedule == "" {
+		schedule = defaultSchedule
 	}
 
 	checker := &web.Checker{
