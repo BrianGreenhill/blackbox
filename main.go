@@ -7,7 +7,6 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	"time"
 
 	"github.com/briangreenhill/blackbox/cmd"
 	"github.com/briangreenhill/blackbox/cron"
@@ -17,16 +16,15 @@ import (
 )
 
 var (
-	defaultSchedule = "* * * * * *"
-	url             string
-	schedule        string
-	name            string
+	url      string
+	schedule string
+	name     string
 )
 
 func init() {
-	flag.StringVar(&name, "name", "check_"+time.Now().Format("2006-01-02_15:04"), "The name of the check")
-	flag.StringVar(&url, "url", "", "The URL to check")
-	flag.StringVar(&schedule, "schedule", defaultSchedule, "The schedule in six star format")
+	flag.StringVar(&name, "name", os.Getenv("TARGET_NAME"), "The name of the check")
+	flag.StringVar(&url, "url", os.Getenv("TARGET_URL"), "The URL to check")
+	flag.StringVar(&schedule, "schedule", os.Getenv("SCHEDULE"), "The schedule in six star format")
 }
 
 func main() {
