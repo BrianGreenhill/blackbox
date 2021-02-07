@@ -1,0 +1,5 @@
+#!/bin/env sh
+
+# Run `make githooks-init` to run it as a pre-commit hook
+
+make lint
