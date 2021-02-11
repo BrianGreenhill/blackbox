@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"net/http"
 	"os"
@@ -14,12 +15,29 @@ import (
 	"github.com/briangreenhill/blackbox/web"
 )
 
-const URL = "https://www.google.com"
-const ScheduleFormat = "* * * * * *"
+const defaultSchedule = "* * * * * *"
+
+var (
+	url      string
+	schedule string
+	name     string
+)
+
+func init() {
+	flag.StringVar(&name, "name", os.Getenv("TARGET_NAME"), "The name of the check")
+	flag.StringVar(&url, "url", os.Getenv("TARGET_URL"), "The URL to check")
+	flag.StringVar(&schedule, "schedule", os.Getenv("SCHEDULE"), "The schedule in six star format")
+}
 
 func main() {
-	signals := make(chan os.Signal, 1)
-	signal.Notify(signals, syscall.SIGINT, syscall.SIGTERM)
+	flag.Parse()
+	if url == "" {
+		log.Fatal("url is required")
+	}
+
+	if schedule == "" {
+		schedule = defaultSchedule
+	}
 
 	checker := &web.Checker{
 		Client:   http.DefaultClient,
@@ -27,19 +45,20 @@ func main() {
 	}
 
 	target := internal.Target{
-		Name: "Google",
-		URL:  URL,
+		Name: name,
+		URL:  url,
 	}
 
 	scheduleCommand := cmd.ScheduleCommand{
 		Scheduler: cron.NewCronScheduler(checker, target),
 	}
 
-	if err := scheduleCommand.RunSchedule(ScheduleFormat); err != nil {
+	if err := scheduleCommand.RunSchedule(schedule); err != nil {
 		log.Fatal(err)
 	}
 
+	signals := make(chan os.Signal, 1)
+	signal.Notify(signals, syscall.SIGINT, syscall.SIGTERM)
 	s := <-signals
-	log.Printf("got %s signal, shutting down", s.String())
-	os.Exit(0)
+	log.Fatalf("got %s signal, shutting down", s.String())
 }
