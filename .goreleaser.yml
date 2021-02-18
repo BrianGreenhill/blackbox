@@ -1,0 +1,29 @@
+# See https://goreleaser.com/customization/
+before:
+  hooks:
+  - go mod download
+builds:
+- env:
+  - CGO_ENABLED=0
+  goos:
+  - linux
+  - windows
+  - darwin
+  goarch:
+  - amd64
+  - arm64
+archives:
+- replacements:
+    darwin: macOS
+release:
+  draft: true
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-{{ .ShortCommit }}"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+    - '^fix:'
+    - '^test:'
