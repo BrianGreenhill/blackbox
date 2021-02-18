@@ -23,14 +23,12 @@ var (
 	name     string
 )
 
-func init() {
+func main() {
 	flag.StringVar(&name, "name", os.Getenv("TARGET_NAME"), "The name of the check")
 	flag.StringVar(&url, "url", os.Getenv("TARGET_URL"), "The URL to check")
 	flag.StringVar(&schedule, "schedule", os.Getenv("SCHEDULE"), "The schedule in six star format")
-}
-
-func main() {
 	flag.Parse()
+
 	if url == "" {
 		log.Fatal("url is required")
 	}
